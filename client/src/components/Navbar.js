@@ -15,6 +15,13 @@ class Navbar extends React.Component {
             name='logout'
             onClick={ () => handleLogout(this.props.history) }
           />
+          <Link to='/new'>
+            <Menu.Item
+              id='new'
+              name='new'
+              active={location.pathname === '/new'}
+            />
+          </Link>
         </Menu.Menu>
       )
     } else {

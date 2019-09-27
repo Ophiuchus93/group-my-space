@@ -12,6 +12,27 @@ class Home extends React.Component {
     })
   } 
 
+  // componentDidUpdate() {
+  //   axios.get("/api/posts")
+  //   .then(res => {
+  //     this.setState({posts: res.data})
+  //   });
+
+  // }
+
+  deletePost(id) {
+    // debugger
+    axios.delete(`/api/posts/${id}`)
+    .then(res => {
+      const { posts, } = this.state;
+      this.setState({ posts: posts.filter(p => p.id !== id) }) 
+    })
+    .catch(err => {
+      debugger
+      console.log(err)
+    })
+  }
+
   renderPosts() {
     const { posts, } = this.state;
     return posts.map(post => (
@@ -22,7 +43,8 @@ class Home extends React.Component {
           <Card.Title>Title: {post.title}</Card.Title>
           <br />
           <Card.Text>Post: {post.body}</Card.Text>
-          {/* <Button variant="primary"></Button> */}
+          <Button variant="danger" onClick={() => this.deletePost(post.id)}>Delete</Button>
+          <Button variant="warning">Update</Button>
         </Card.Body>
       </Card>
     ))
